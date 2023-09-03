@@ -79,28 +79,35 @@ struct GameView: View {
                 ForEach(dataManager.itemData, id: \.id) { item in
                     HeaderView(Int(item.hp.description) ?? 5)
                         .foregroundColor(Color.OasisColors.white)
-                        .padding(.bottom, 39)
+                        .padding(.bottom, 40)
                         .padding(.horizontal, margin)
                     
                     StoryView(item.content, imgName)
+                        .padding(.bottom, 34)
                     
-                    VStack {
+                    VStack(spacing: 0) {
                         ForEach(Array(item.choices.keys.sorted()), id: \.self) { key in
-                            VStack {
-                                Text("\(key): \(item.choices[key] ?? "")")
-                                    .onTapGesture {
-                                        command = key
-                                        print(command)
-                                    }
-                                    .font(.subheadline)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(Color.OasisColors.white)
-                                    .padding(.vertical, 16)
-                                    .padding(.horizontal, margin)
-                                Divider()
+                            Button {
+                                command = key
+                                print(command)
+                            } label: {
+                                VStack {
+                                    Text("\(key): \(item.choices[key] ?? "")")
+                                        .font(.subheadline)
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(setOptionTextColor(key))
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.vertical, 16)
+                                        .padding(.top, 4)
+                                        .padding(.horizontal, margin)
+                                    
+                                    Divider()
+                                }
+                                .background(setOptionBackground(command))
                             }
                         }
                     }
+                    .padding(.bottom, 59)
                 }
             }
         }
@@ -119,6 +126,22 @@ struct GameView: View {
         }
         
         return hpStatus
+    }
+    
+    func setOptionTextColor(_ key: String) -> Color {
+        if key == command {
+            return Color.OasisColors.darkGreen
+        } else {
+            return Color.OasisColors.white
+        }
+    }
+    
+    func setOptionBackground(_ key: String) -> Color {
+        if key == command {
+            return Color.OasisColors.yellow
+        } else {
+            return Color.clear
+        }
     }
 }
 
@@ -161,18 +184,18 @@ private extension GameView {
     @ViewBuilder
     func StoryView(_ content: String, _ img: String) -> some View {
         ScrollView {
-            Text(content)
-                .speakOnTap(content)
-                .font(.headline)
-                .foregroundColor(Color.OasisColors.white)
-                .frame(maxWidth: .infinity, alignment: .leadingFirstTextBaseline)
-            
             Image(img)
                 .resizable()
                 .scaledToFit()
                 .onTapGesture {
                     self.showImageOnly = true
                 }
+            
+            Text(content)
+                .speakOnTap(content)
+                .font(.headline)
+                .foregroundColor(Color.OasisColors.white)
+                .frame(maxWidth: .infinity, alignment: .leadingFirstTextBaseline)
         }
         .padding(.horizontal, 18)
         .background(
