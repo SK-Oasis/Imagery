@@ -89,7 +89,7 @@ struct GameView: View {
                         StoryView(dataManager.dataList[lastIndex].content, dataManager.dataList[lastIndex].dall)
                             .accessibilityLabel("\(dataManager.dataList[lastIndex].content)")
                             .accessibilityIdentifier("content")
-                            .padding(.bottom, 34)
+                            .padding(.bottom, 12)
                         
                         VStack(spacing: 0) {
                             VStack {
@@ -97,8 +97,19 @@ struct GameView: View {
                                     Button {
                                         if (dataManager.pressed == false) {
                                             dataManager.pressed = true
-                                            Task {
-                                                await dataManager.loadData("a")
+                                            if(gameManager.gameState == .result)
+                                            {
+                                                DataManager.shared.isLoading = true
+                                                GameManager.shared.gameState = .playing
+                                                dataManager.subjectList.append(dataManager.randomSubject)
+                                                Task {
+                                                    await DataManager.shared.loadData(dataManager.randomSubject)
+                                                }
+                                            }
+                                            else {
+                                                Task {
+                                                    await dataManager.loadData("a")
+                                                }
                                             }
                                         }
                                         selectedKey = "a"
@@ -123,8 +134,14 @@ struct GameView: View {
                                     Button {
                                         if (dataManager.pressed == false) {
                                             dataManager.pressed = true
-                                            Task {
-                                                await dataManager.loadData("b")
+                                            if(gameManager.gameState == .result)
+                                            {
+                                                GameManager.shared.gameState = .randomStory
+                                            }
+                                            else {
+                                                Task {
+                                                    await dataManager.loadData("b")
+                                                }
                                             }
                                         }
                                         selectedKey = "b"
@@ -150,8 +167,16 @@ struct GameView: View {
                                     Button {
                                         if (dataManager.pressed == false) {
                                             dataManager.pressed = true
-                                            Task {
-                                                await dataManager.loadData("c")
+                                            if(gameManager.gameState == .result)
+                                            {
+                                                gameManager.gameState = .initial
+                                                print(gameManager.gameState)
+                                                gameManager.healthState = .normal
+                                            }
+                                            else {
+                                                Task {
+                                                    await dataManager.loadData("c")
+                                                }
                                             }
                                         }
                                         selectedKey = "c"
@@ -278,7 +303,7 @@ private extension GameView {
                 .onTapGesture {
                     self.showImageOnly = true
                 }
-                .padding(.bottom, 18)
+                .padding(.bottom, 6)
                 
                 Text("위의 일러스트를 눌러보세요.")
                     .font(.footnote)
@@ -289,7 +314,7 @@ private extension GameView {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color.OasisColors.yellow)
                     )
-                    .padding(.bottom, 18)
+                    .padding(.bottom, 6)
             }
             
             HStack {

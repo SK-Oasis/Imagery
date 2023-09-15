@@ -164,6 +164,7 @@ private extension RandomStoryView {
             Button {
                 DataManager.shared.isLoading = true
                 GameManager.shared.gameState = .playing
+                GameManager.shared.healthState = .normal
                 dataManager.subjectList.append(dataManager.randomSubject)
                 Task {
                     await DataManager.shared.loadData(dataManager.randomSubject)

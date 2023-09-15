@@ -39,7 +39,6 @@ struct ContentView: View {
                     await DataManager.shared.getSubject()
                 }
             }
-            
             HapticManager.shared.prepareHaptics()
         }
     }

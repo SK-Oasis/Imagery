@@ -51,11 +51,13 @@ struct StartView: View {
                 }
             
             VStack(spacing: gap) {
-                PlayButton(buttonType: .recentStory)
-                    .accessibilityLabel(ButtonType.recentStory.label)
-                    .accessibilityIdentifier("recentStory")
-                    .disabled(dataManager.dataList.count > 0 ? false : true)
-                    .opacity(isFirstPlay ? 0 : 1)
+                if (GameManager.shared.healthState != .fail) && (GameManager.shared.healthState != .success) {
+                    PlayButton(buttonType: .recentStory)
+                        .accessibilityLabel(ButtonType.recentStory.label)
+                        .accessibilityIdentifier("recentStory")
+                        .disabled(dataManager.dataList.count > 0 ? false : true)
+                        .opacity(isFirstPlay ? 0 : 1)
+                }
                 PlayButton(buttonType: .ownStory)
                     .accessibilityLabel(ButtonType.ownStory.label)
                     .accessibilityIdentifier("ownStory")

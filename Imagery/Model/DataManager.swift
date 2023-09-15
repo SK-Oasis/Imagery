@@ -24,14 +24,23 @@ class DataManager : ObservableObject {
     @Published var subjectList = [String]()
     
     func resetData() {
-        if let url = URL(string: "http://15.164.95.147:5000/api/reset") {
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                guard error == nil else {
-                    print(error!.localizedDescription)
-                    return
-                }
+        var url = URL(string: baseURL + "api/reset")
+        
+        
+        let deviceTokenQuery = URLQueryItem(name: "deviceToken", value: DeviceTokenManager.shared.deviceToken!)
+        url!.append(queryItems: [deviceTokenQuery])
+        
+        var requestURL = URLRequest(url: url!)
+        requestURL.httpMethod = "POST"
+        requestURL.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: requestURL) { data, response, error in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
             }
-        }
+        }.resume()
+        
     }
     
     
@@ -112,7 +121,6 @@ class DataManager : ObservableObject {
         let command_query = URLQueryItem(name: "ownStory", value: command)
         url!.append(queryItems: [command_query])
         
-        
         var requestURL = URLRequest(url: url!)
         requestURL.httpMethod = "POST"
         requestURL.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -141,10 +149,14 @@ class DataManager : ObservableObject {
                 let command_query = URLQueryItem(name: "command", value: command)
                 url!.append(queryItems: [command_query])
             } else {
+                self.resetData()
                 let command_query = URLQueryItem(name: "ownStory", value: command)
                 url!.append(queryItems: [command_query])
             }
         }
+        
+        let deviceTokenQuery = URLQueryItem(name: "deviceToken", value: DeviceTokenManager.shared.deviceToken!)
+        url!.append(queryItems: [deviceTokenQuery])
         
         var requestURL = URLRequest(url: url!)
         requestURL.httpMethod = "POST"
@@ -172,9 +184,11 @@ class DataManager : ObservableObject {
                                         GameManager.shared.background = Color.OasisColors.darkGreen
                                     }
                                 }
+                                GameManager.shared.gameState = .result
                             }
                             else if (self.dataList.last!.state == "success") {
                                 GameManager.shared.healthState = .success
+                                GameManager.shared.gameState = .result
                             }
                             else {
                                 if (userResponse!.hp == self.dataList.last!.hp) {
@@ -200,7 +214,6 @@ class DataManager : ObservableObject {
                                 }
                             }
                         }
-                        
                         
                         self.dataList.append(userResponse!)
                         self.pressed = false

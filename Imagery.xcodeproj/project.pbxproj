@@ -16,6 +16,7 @@
 		BF08BAEC2AB2C73500B44385 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF08BAEB2AB2C73500B44385 /* HapticManager.swift */; };
 		BF23ED072AA434AD00851962 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23ED062AA434AD00851962 /* HistoryView.swift */; };
 		BF23ED0A2AA435FF00851962 /* HistoryGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23ED092AA435FF00851962 /* HistoryGrid.swift */; };
+		BF6C47532AB4D3AE00B68EB4 /* DeviceTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C47522AB4D3AE00B68EB4 /* DeviceTokenManager.swift */; };
 		BF9A267E2AA1270500F73E17 /* ImageryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A267D2AA1270500F73E17 /* ImageryApp.swift */; };
 		BF9A26802AA1270500F73E17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A267F2AA1270500F73E17 /* ContentView.swift */; };
 		BF9A26822AA1270600F73E17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF9A26812AA1270600F73E17 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		BF08BAEB2AB2C73500B44385 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		BF23ED062AA434AD00851962 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		BF23ED092AA435FF00851962 /* HistoryGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGrid.swift; sourceTree = "<group>"; };
+		BF6C47522AB4D3AE00B68EB4 /* DeviceTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTokenManager.swift; sourceTree = "<group>"; };
 		BF9A267A2AA1270500F73E17 /* Imagery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Imagery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF9A267D2AA1270500F73E17 /* ImageryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageryApp.swift; sourceTree = "<group>"; };
 		BF9A267F2AA1270500F73E17 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				BF9A269A2AA1EEBB00F73E17 /* DataManager.swift */,
 				BF9A26972AA1EA4800F73E17 /* Item.swift */,
 				BF08BAEB2AB2C73500B44385 /* HapticManager.swift */,
+				BF6C47522AB4D3AE00B68EB4 /* DeviceTokenManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				5BF461BB2AA3B1F100E36BDA /* OwnStoryView.swift in Sources */,
 				BF9A268F2AA1E86700F73E17 /* StartView.swift in Sources */,
 				5BF461C52AA4055A00E36BDA /* InAlbumView.swift in Sources */,
+				BF6C47532AB4D3AE00B68EB4 /* DeviceTokenManager.swift in Sources */,
 				BF23ED072AA434AD00851962 /* HistoryView.swift in Sources */,
 				5BF461C92AA4059200E36BDA /* OverallAlbumView.swift in Sources */,
 				BF9A26982AA1EA4800F73E17 /* Item.swift in Sources */,

@@ -250,6 +250,7 @@ private extension OwnStoryView {
         Button {
             DataManager.shared.isLoading = true
             GameManager.shared.gameState = .playing
+            GameManager.shared.healthState = .normal
             Task {
                 await DataManager.shared.loadData(text)
                 await DataManager.shared.loadSummary(text)
